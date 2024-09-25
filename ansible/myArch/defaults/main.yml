@@ -23,12 +23,11 @@ additional_soft:
 
   # other
   - keepassxc
-  - compton # blur xterm
 
 user:
   name: retzs64
   email: toto@gmail.com
-  password: 
+  password: password
   groups:
     - wheel
     - docker

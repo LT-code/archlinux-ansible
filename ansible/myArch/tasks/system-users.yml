@@ -22,11 +22,17 @@
     name: "{{ user.name }}"
     state: present
 
+- name: Create hashed password
+  become: true
+  ansible.builtin.command: "openssl passwd -6 {{ user.password }}"
+  register: hashed_password
+  no_log: true
+
 - name: create normal user
   user:
     name: "{{ user.name }}"
     group: "{{ user.name }}"
-    password: "{{ 'toor' | password_hash('sha512') }}"
+    password: "{{ hashed_password.stdout }}"
     update_password: on_create
     create_home: true
     groups: "{{ user.groups }}"

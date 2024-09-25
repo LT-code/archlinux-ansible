@@ -5,6 +5,7 @@
       - gvim
       - neovim
       - yarn
+      - npm
       - ripgrep
       - fd
   become: true

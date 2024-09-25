@@ -6,7 +6,7 @@
       - elementary-icon-theme
       - lightdm
       - lightdm-gtk-greeter
-      - xcursor-simpleandsoft
+      #- xcursor-simpleandsoft
       - xss-lock # lock after timeout see i3 config
       - light-locker # secure locker for lightdm
   become: true

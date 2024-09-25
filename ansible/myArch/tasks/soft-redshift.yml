@@ -5,14 +5,14 @@
       - redshift
     state: present
 
-- name: Allow RedShift to access geoclue
-  blockinfile:
-    dest: /etc/geoclue/geoclue.conf
-    block: |
-      [redshift]
-      allowed=true
-      system=false
-      users=
+#- name: Allow RedShift to access geoclue
+#  blockinfile:
+#    dest: /etc/geoclue/geoclue.conf
+#    block: |
+#      [redshift]
+#      allowed=true
+#      system=false
+#      users=
 
 - name: ansible create directory redshift
   file:
