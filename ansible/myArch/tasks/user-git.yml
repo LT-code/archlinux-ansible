@@ -1,0 +1,58 @@
+---
+- include_vars: vars/secret.yml
+
+- name: install git
+  pacman:
+    name: git
+  become: true
+
+- name: configure git name
+  git_config:
+    name: user.name
+    value: "{{ user.real_name }}"
+    scope: global
+  become: true
+  become_user: "{{ user.name }}"
+
+- name: configure git email
+  git_config:
+    name: user.email
+    value: "{{ user.email }}"
+    scope: global
+  become: true
+  become_user: "{{ user.name }}"
+
+#- name: Git pull user config repo
+#  git:
+#    repo: "{{ git_repo_user_configuration }}"
+#    dest: "/root/temp-git-config"
+#    clone: yes
+#    update: yes
+#    version: master
+#    force: yes
+#
+#- name: Copy pulled repo in user dir
+#  shell: "cd /root/temp-git-config/ && find . -not -iname '{*,.*}' -exec cp -r '{}' '/home/{{user.name}}/{}' ';'"
+#
+#- name: Delete temp directory
+#  file:
+#    state: absent
+#    path: "/root/temp-git-config"
+
+- name: Change file ownership, group and permissions on user home dir
+  file:
+    path: /home/{{ user.name }}/
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    recurse: yes
+
+- name: Change file ownership, group and permissions on user home dir
+  file:
+    path: /home/{{ user.name }}/.config
+    state: directory
+    mode: '0700'
+    recurse: yes
+
+- name: Clean user repo
+  shell: "cd /home/{{user.name}}/ && git checkout . && git clean -df"
+  become_user: "{{ user.name }}"

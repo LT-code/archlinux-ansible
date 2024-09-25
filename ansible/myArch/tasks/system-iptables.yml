@@ -1,0 +1,11 @@
+---
+- name: configure iptables rules
+  template:
+    src: iptables.rules
+    dest: /etc/iptables/iptables.rules
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  notify:
+    - restart iptables

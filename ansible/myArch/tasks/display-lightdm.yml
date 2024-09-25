@@ -1,0 +1,28 @@
+---
+- name: install GUI
+  pacman:
+    name:
+      - arandr
+      - elementary-icon-theme
+      - lightdm
+      - lightdm-gtk-greeter
+      - xcursor-simpleandsoft
+      - xss-lock # lock after timeout see i3 config
+      - light-locker # secure locker for lightdm
+  become: true
+
+- name: enable GUI on boot
+  systemd:
+    name: lightdm
+    enabled: true
+  become: true
+
+- name: Change grub wallpaper and theme
+  copy:
+    src: "lightdm/{{ item }}"
+    dest: "/etc/lightdm/{{ item }}"
+  with_items:
+    - background.jpg
+    - user.png
+    - lightdm.conf
+    - lightdm-gtk-greeter.conf

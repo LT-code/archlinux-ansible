@@ -1,0 +1,13 @@
+[virtualbox_arch]
+WorkArch ansible_connection=local
+ArchLinux ansible_connection=local
+
+[arch]
+LTkey ansible_connection=local
+gin ansible_connection=local
+
+[virtualbox_arch:vars]
+virtualbox_guest_enable=True
+
+[arch:vars]
+virtualbox_guest_enable=False

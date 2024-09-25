@@ -1,0 +1,14 @@
+---
+- name: install NeoVim IDE
+  pacman:
+    name:
+      - gvim
+      - neovim
+      - yarn
+      - ripgrep
+      - fd
+  become: true
+
+#- name: install nvim plug
+#  shell: git clone https://github.com/NvChad/NvChad /home/{{ user.name }}/.config/nvim --depth 1
+#  become_user: "{{ user.name }}"

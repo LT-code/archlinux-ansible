@@ -1,0 +1,15 @@
+
+---
+- name: sudo access with passwd
+  replace:
+    path: /etc/sudoers
+    regexp: '%wheel\s+ALL=\(ALL\)\s+NOPASSWD:\s+ALL'
+    replace: '%wheel ALL=(ALL) ALL'
+
+- name: Remove all pacman cache package
+  shell: rm -r /var/cache/pacman/pkg/*
+  become: true
+
+  # - name: Remove pacman orphans and their configuration files
+  #   shell: pacman -Rns $(pacman -Qtdq) --noconfirm
+  #   become: true

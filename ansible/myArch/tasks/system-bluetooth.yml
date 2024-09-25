@@ -1,0 +1,28 @@
+---
+- name: install bluetooth
+  pacman:
+    name:
+      - bluez
+      - blueberry
+      - pulseaudio-bluetooth
+  become: true
+
+- name: enable bluetooth
+  systemd:
+    name: bluetooth
+    enabled: true
+  become: true
+
+- name: enable bluetooth on boot
+  copy:
+    src: bluetooth/bluetooth-main.conf
+    dest: /etc/bluetooth/main.conf
+    owner: "{{ user.name }}"
+  become: true
+
+- name: enable bluetooth on boot
+  copy:
+    src: bluetooth/bluetooth-audio.conf
+    dest: /etc/pulse/system.pa
+    owner: "{{ user.name }}"
+  become: true

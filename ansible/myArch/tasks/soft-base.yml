@@ -1,0 +1,29 @@
+---
+- name: Install dictionaries
+  pacman:
+    name:
+      - alacritty # terminal
+      - hunspell
+      - 'hunspell-{{ dictionaries.hunspell_lang }}'
+      - 'mythes-{{ dictionaries.mythes_lang }}'
+    state: present
+
+- name: install fonts
+  pacman:
+    name:
+      - fish
+      - tidy
+      - adobe-source-code-pro-fonts
+      - ttf-font-awesome
+      - ttf-dejavu
+      - ttf-jetbrains-mono-nerd
+  become: true
+
+- name: install aur fonts
+  aur:
+    name:
+      - ttf-font-awesome-5
+      - ttf-font-icons
+
+  become_user: "{{ user.name }}"
+

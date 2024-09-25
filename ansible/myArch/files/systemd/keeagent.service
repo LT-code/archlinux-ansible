@@ -1,0 +1,14 @@
+[Unit]
+Description=SSH key agent
+
+[Service]
+Type=simple
+User=retzs64
+Group=retzs64
+Environment=SSH_AUTH_SOCK=/tmp/keeagent.sock
+# DISPLAY required for ssh-askpass to work
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,8 @@
+---
+- name: install tor
+  pacman:
+    name:
+      - torsocks
+      - tor
+  become: true
+

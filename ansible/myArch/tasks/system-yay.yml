@@ -1,0 +1,16 @@
+---
+- name: clone yay from github
+  become_user: "{{ user.name }}"
+  git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: /tmp/yay
+    version: master
+    update: yes
+
+- name: makepkg --noconfirm -si
+  become_user: "{{ user.name }}"
+  command: makepkg --noconfirm -si
+  args:
+    chdir: /tmp/yay
+    creates: /usr/bin/yay
+

@@ -1,0 +1,35 @@
+---
+- name: Install RedShift and dependencies
+  pacman:
+    name:
+      - redshift
+    state: present
+
+- name: Allow RedShift to access geoclue
+  blockinfile:
+    dest: /etc/geoclue/geoclue.conf
+    block: |
+      [redshift]
+      allowed=true
+      system=false
+      users=
+
+- name: ansible create directory redshift
+  file:
+    path: /home/{{ user.name}}/.config/redshift
+    owner: "{{ user.name }}"
+    state: directory
+
+- name: template redshift.conf
+  copy:
+    src: redshift.conf
+    dest: /home/{{ user.name}}/.config/redshift/redshift.conf
+    owner: "{{ user.name }}"
+  become: true
+  become_user: "{{ user.name }}"
+
+#- name: enable GUI on boot
+#  systemd:
+#    name: redshift
+#    enabled: true
+#  become: true

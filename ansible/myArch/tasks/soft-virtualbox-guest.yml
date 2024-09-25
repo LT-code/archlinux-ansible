@@ -1,0 +1,24 @@
+
+---
+- name: Install VirtualBox guest additions
+  pacman:
+    name:
+      - linux-headers
+      - virtualbox-guest-utils
+      - xf86-video-vmware 
+  become: true
+
+
+- name: enable guest additions
+  systemd:
+    name: vboxservice
+    state: started
+    enabled: yes
+  become: true
+
+- name: copy vbox shell executor
+  copy:
+    src: virtualbox_startup_command.sh
+    dest: ~/.config/startup_command.sh
+    mode: '0700'
+  become_user: "{{ user.name }}"

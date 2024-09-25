@@ -1,0 +1,44 @@
+---
+- name: install i3
+  pacman:
+    name:
+      - xorg
+      - i3-gaps
+      - i3blocks
+      - i3status-rust
+  become: true
+
+- name: install lock
+  aur:
+    name:
+      - i3lock-fancy-multimonitor
+  become_user: "{{ user.name }}"
+
+
+- name: Set correct X11 keymap
+  template:
+    src: xorg/00-keyboard.conf
+    dest: /etc/X11/xorg.conf.d/
+
+- name: Copy pointer configuration file
+  copy:
+    src: xorg/30-mouse.conf
+    dest: /etc/X11/xorg.conf.d/
+  when: xorg.mouse_config is sameas True
+
+- name: Copy pointer configuration file
+  copy:
+    src: xorg/20-pointerkeys.conf
+    dest: /etc/X11/xorg.conf.d/
+  when: xorg.mouse_config is sameas True
+
+- name: Touchpad configuration file
+  copy:
+    src: xorg/40-libinput.conf
+    dest: /etc/X11/xorg.conf.d/
+  when: xorg.mouse_config is sameas True
+
+    #- name: Xorg config
+    #  copy:
+    #    src: xorg/xorg.conf
+    #    dest: /etc/X11/

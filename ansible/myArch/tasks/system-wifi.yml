@@ -1,0 +1,14 @@
+---
+- name: install network manager
+  pacman:
+    name:
+      - networkmanager
+      - network-manager-applet
+  become: true
+
+- name: enable networkmanager
+  systemd:
+    name: NetworkManager
+    state: started
+    enabled: yes
+  become: true

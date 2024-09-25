@@ -1,0 +1,46 @@
+---
+- name: install aur applications
+  aur:
+    name:
+      - plymouth
+      - plymouth-theme-hexa-retro-git
+  become_user: "{{ user.name }}"
+
+- name: Get graphical kernel module loaded
+  shell: lspci -v | grep VGA -A 8 | grep "Kernel driver" | awk '{print $5}'
+  register: graphical_kernel_module_loaded
+  changed_when: false
+
+- name: "Adding {{ item.value }} flag in grub config"
+  replace:
+    dest: /etc/default/grub
+    regexp: '^({{ item.key }}=)(?!.*[ |"]+{{ item.value }}[ |"]+)(.*)["|$| ]+'
+    replace: '\1\2 {{ item.value }}"'
+  with_items:
+    - {key: "GRUB_CMDLINE_LINUX_DEFAULT", value: "quiet"}
+    - {key: "GRUB_CMDLINE_LINUX_DEFAULT", value: "splash"}
+
+- name: "Removing encrypt flag in mkinitcpio.conf"
+  replace:
+    path: '/etc/mkinitcpio.conf'
+    regexp: '(HOOKS=.*)[(| ]encrypt[ |)](.*)[)| |$]*'
+    replace: '\1\2)'
+
+- name: "Adding {{ item.value }} flag in mkinitcpio.conf"
+  replace:
+    dest: /etc/mkinitcpio.conf
+    regexp: '^({{ item.key}}=)(?!.*[ |(]+{{ item.value }}[ |)]+)(.*)[)|$| ]+'
+    replace: '\1\2 {{ item.value }})'
+  with_items:
+    - {key: "MODULES", value: "{{ graphical_kernel_module_loaded.stdout }}"}
+    - {key: "HOOKS", value: "plymouth"}
+    - {key: "HOOKS", value: "encrypt"}
+
+- name: Reload grub configuration
+  shell: grub-mkconfig -o /boot/grub/grub.cfg
+  changed_when: false
+
+- name: Set plymouth theme
+  shell: plymouth-set-default-theme -R hexa_retro
+  changed_when: false
+

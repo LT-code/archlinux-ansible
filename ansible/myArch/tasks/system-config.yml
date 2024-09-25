@@ -1,0 +1,6 @@
+---
+- name: copying hosts file
+  template:
+    src: hosts
+    dest: /etc/hosts
+    mode: '0644'

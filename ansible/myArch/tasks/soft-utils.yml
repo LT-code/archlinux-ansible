@@ -1,0 +1,99 @@
+---
+- name: install applications from comunity
+  pacman:
+    name:
+      # passwd manager
+      - archlinux-keyring
+      - gnome-keyring
+      
+      # display helper
+      - arandr
+
+      # utils
+      - htop # services viewer
+      - xclip # words copy
+      - dunst # desktop noification
+      - rofi # bin selector
+      - xdotool # write keyboard robot
+      - jq # needed by my conky config
+      - curl # Install download utilities
+      - wget # Install download utilities
+      - tlp # battery saver
+      - playerctl # media controler
+      - acpi # battery information
+      - unzip # archive
+      - zip # archive
+      - tar # archive
+      - curl # http request
+      - ntfs-3g
+      - bash-completion
+      - alacritty # terminal
+      #- xterm # terminal
+  become: true
+
+- name: install additionnal soft 
+  pacman:
+    name: "{{ additional_soft }}"
+  become: true
+
+- name: enable bluetooth on boot
+  copy:
+    src: systemd/keeagent.service
+    dest: /etc/systemd/system/keepassagent.service
+
+- name: Reload service keepassagent
+  shell: systemctl daemon-reload
+
+- name: Enable service keepassagent
+  service:
+    name: keepassagent
+    enabled: yes
+
+- name: create Programmation dir
+  file:
+    path: ~/Programming
+    state: directory
+  become_user: "{{ user.name }}"
+
+- name: create Nextcloud dir
+  file:
+    path: ~/Nextcloud
+    state: directory
+  become_user: "{{ user.name }}"
+
+- name: install utilities
+  pacman:
+    name:
+  become: true
+
+- name: enable tlp
+  systemd:
+    name: tlp
+    enabled: true
+  become: true
+
+  # - name: Install archive utilities
+  #   pacman:
+  #     name:
+  #       - atool
+  #       - p7zip
+  #       - unrar
+  #       - unzip
+  #       - xz
+  #       - zip
+  #       - gzip
+  #       - tar
+  #     state: present
+  # 
+  # - name: Install download utilities
+  #   pacman:
+  #     name:
+  #       - curl
+  #       - wget
+  #     state: present
+  # 
+  # - name: Install Android Tools
+  #   pacman:
+  #     name:
+  #       - android-tools
+  #       - android-udev

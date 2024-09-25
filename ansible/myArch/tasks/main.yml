@@ -1,0 +1,48 @@
+---
+################
+# system
+################
+- import_tasks: system-base.yml
+- import_tasks: system-users.yml
+- import_tasks: system-pacman.yml
+- import_tasks: system-yay.yml
+- import_tasks: system-audio.yml
+- import_tasks: system-cpu.yml
+- import_tasks: system-iptables.yml
+- import_tasks: system-bluetooth.yml
+- import_tasks: system-wifi.yml
+- import_tasks: system-config.yml
+
+################
+# display
+################
+- import_tasks: display-gpu.yml
+- import_tasks: display-i3.yml
+- import_tasks: display-lightdm.yml
+#- import_tasks: display-plymouth.yml
+- import_tasks: display-grub.yml
+
+################
+# soft
+################
+- import_tasks: soft-base.yml
+- import_tasks: soft-utils.yml
+- import_tasks: soft-redshift.yml
+
+################
+# user 
+################
+- import_tasks: user-git.yml
+- import_tasks: soft-virtualbox-guest.yml
+  when: virtualbox_guest_enable
+
+################
+# dev 
+################
+- import_tasks: dev-neovim.yml
+#- import_tasks: dev-c-family.yml
+
+################
+# Post install
+################
+- import_tasks: user-cleaning.yml

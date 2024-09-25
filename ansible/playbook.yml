@@ -1,0 +1,16 @@
+---
+- hosts: myArch
+  roles:
+    - settings
+    - base-soft
+    - i3
+  vars_prompt:
+    - name: "user.name"
+      prompt: "Enter your system username"
+      private: false
+    - name: "user.real_name"
+      prompt: "Enter your full real name"
+      private: false
+    - name: "user.email"
+      prompt: "Enter your email address"
+      private: false

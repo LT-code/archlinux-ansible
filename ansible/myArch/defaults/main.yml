@@ -1,0 +1,45 @@
+dictionaries:
+  # Language settings must match package name, e.g. hunspell-en_GB
+  hunspell_lang: en_US
+  mythes_lang: en
+
+archlinux_enable_openssh_server: true
+
+grub_theme: Vimix
+
+additional_soft:
+  # navigator
+  #- chromium
+  - firefox
+
+  # file gestion
+  - thunar # file view
+  - viewnior # view image
+  - nextcloud-client # file sync
+  
+  # desktop screen capture
+  - recordmydesktop
+  - flameshot
+
+  # other
+  - keepassxc
+  - compton # blur xterm
+
+user:
+  name: retzs64
+  email: toto@gmail.com
+  password: 
+  groups:
+    - wheel
+    - docker
+    - bumblebee
+  real_name: toto
+  generate_ssh_key: True
+  ssh_key_bits: 4096
+  ssh_key_type: rsa
+
+xorg:
+  XkbLayout: us
+  XkbModel: pc105
+  mouse_config: True
+  font_size: 16
