@@ -48,8 +48,8 @@
   when: not display_controllers.results[2].failed
   become: true
 
-- name: load module nvidia
-  modprobe:
-    name: nvidia
-    state: present
-  when: not display_controllers.results[2].failed
+#- name: load module nvidia
+#  modprobe:
+#    name: nvidia
+#    state: present
+#  when: not display_controllers.results[2].failed
