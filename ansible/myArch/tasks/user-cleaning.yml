@@ -1,5 +1,10 @@
 
 ---
+- name: disable dhcpd (because of NetworkManagement precesent)
+  service:
+    name: dhcpd
+    enabled: no
+  
 - name: sudo access with passwd
   replace:
     path: /etc/sudoers

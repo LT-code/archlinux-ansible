@@ -7,6 +7,9 @@ archlinux_enable_openssh_server: true
 
 grub_theme: Vimix
 
+pci_card_id_hex: "2:0:0"
+pci_card_id: "02:00:0"
+
 additional_soft:
   # navigator
   #- chromium

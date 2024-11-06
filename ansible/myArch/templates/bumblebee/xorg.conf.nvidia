@@ -31,5 +31,5 @@ Section "Device"
     Option "NoLogo" "true"
     Option "UseEDID" "false"
     Option "UseDisplayDevice" "none"
-    BusID "PCI:1:0:0"
+    BusID "PCI:{{ pci_card_id_hex }}"
 EndSection

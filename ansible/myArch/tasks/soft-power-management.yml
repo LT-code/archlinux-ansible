@@ -1,0 +1,15 @@
+---
+- name: Add bbswitch preferences
+  copy:
+    src: "bumblebee/bbswitch.conf"
+    dest: "/etc/modprobe.d/bbswitch.conf"
+
+- name: Add busid for bumblebee
+  template:
+    src: "bumblebee/xorg.conf.nvidia"
+    dest: "/etc/bumblebee/xorg.conf.nvidia"
+
+- name: Add tlp config
+  template:
+    src: "tlp.conf"
+    dest: "/etc/tlp.conf"

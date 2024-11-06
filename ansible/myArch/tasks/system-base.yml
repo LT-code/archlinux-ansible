@@ -3,8 +3,3 @@
   pacman:
     update_cache: true
   become: true
-
-- name: install linux lts as a backup kernel
-  pacman:
-    name: linux-lts
-  become: true
