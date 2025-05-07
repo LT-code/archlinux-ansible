@@ -27,6 +27,11 @@ additional_soft:
   # other
   - keepassxc
 
+  # zsh
+  - zsh
+  - oh-my-zsh-git
+  - oh-my-zsh-powerline-theme-git
+
 user:
   name: retzs64
   email: toto@gmail.com

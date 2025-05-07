@@ -2,8 +2,9 @@
 ---
 - name: disable dhcpd (because of NetworkManagement precesent)
   service:
-    name: dhcpd
+    name: dhcpcd
     enabled: no
+  ignore_errors: true
   
 - name: sudo access with passwd
   replace:
