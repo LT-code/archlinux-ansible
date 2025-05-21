@@ -12,6 +12,7 @@
 - import_tasks: system-bluetooth.yml
 - import_tasks: system-wifi.yml
 - import_tasks: system-config.yml
+- import_tasks: system-dns.yml
 
 ################
 # display
