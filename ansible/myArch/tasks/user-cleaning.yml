@@ -1,12 +1,14 @@
 
 ---
 - name: disable dhcpd (because of NetworkManagement precesent)
+  become: true
   service:
     name: dhcpcd
     enabled: no
   ignore_errors: true
   
 - name: sudo access with passwd
+  become: true
   replace:
     path: /etc/sudoers
     regexp: '%wheel\s+ALL=\(ALL\)\s+NOPASSWD:\s+ALL'
