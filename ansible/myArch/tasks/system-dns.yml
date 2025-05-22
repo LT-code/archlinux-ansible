@@ -5,12 +5,12 @@
     name: systemd-resolved
     enabled: yes
 
-- name: Create a symbolic link
-  become: true
-  file:
-    src: /lib/systemd/resolv.conf
-    dest: /etc/resolv.conf
-    owner: root
-    group: root
-    force: true
-    state: link
+#- name: Create a symbolic link
+#  become: true
+#  file:
+#    src: /lib/systemd/resolv.conf
+#    dest: /etc/resolv.conf
+#    owner: root
+#    group: root
+#    force: true
+#    state: link
