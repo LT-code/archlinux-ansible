@@ -29,6 +29,8 @@ additional_soft:
 
   # zsh
   - zsh
+
+additional_soft_aur:
   - oh-my-zsh-git
   - oh-my-zsh-powerline-theme-git
 

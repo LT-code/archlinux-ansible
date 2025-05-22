@@ -32,7 +32,7 @@
   become: true
 
 - name: install additionnal soft 
-  aur:
+  pacman:
     name: "{{ additional_soft }}"
   become: true
 
