@@ -26,8 +26,3 @@
       - ttf-font-icons
   become_user: "{{ user.name }}"
 
-- name: install aur additionals packages
-  aur:
-    name: "{{ additional_soft_aur }}"
-  become_user: "{{ user.name }}"
-

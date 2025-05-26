@@ -36,6 +36,11 @@
     name: "{{ additional_soft }}"
   become: true
 
+- name: install aur additionals packages
+  aur:
+    name: "{{ additional_soft_aur }}"
+  become_user: "{{ user.name }}"
+
 - name: enable bluetooth on boot
   copy:
     src: systemd/keeagent.service
