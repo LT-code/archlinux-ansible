@@ -16,7 +16,6 @@
     name:
       - mesa
       - libva-mesa-driver  # Video decoding acceleration (VA-API)
-      - mesa-vdpau  # Video decoding acceleration (VDPAU)
   become: true
 
 - name: install AMD display drivers
