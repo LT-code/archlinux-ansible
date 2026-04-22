@@ -2,7 +2,6 @@
 - name: install NeoVim IDE
   pacman:
     name:
-      - gvim
       - neovim
       - yarn
       - npm
